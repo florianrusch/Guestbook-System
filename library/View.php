@@ -33,7 +33,7 @@ class Library_View {
 		
 		foreach ($paths as $key => $value) {
 			if (file_exists($value)) {
-				$this->debugMessages[] = 'SUCCESS: ' . $key . '-Template wurde geladen.';
+				$this->debugMessages[] = 'SUCCESS: Template wurde geladen. (' . $key . ')';
 				require_once $value;
 			} else {
 				$this->debugMessages[] = 'ERROR: Das ' . $key . '-Template ist nicht vorhanden. (Path = ' . $value . ')';
@@ -53,7 +53,7 @@ class Library_View {
 		$path = DS . 'public' . DS . 'js' . DS . $fn . '.js';
 		
 		if (file_exists(ROOT . $path)) {
-			$this->debugMessages[] = 'SUCCESS: ' . $fn . '-Javascript wurde geladen.';
+			$this->debugMessages[] = 'SUCCESS: Javascript-Datei wurde geladen. (' . $fn . ')';
 			return '<script src="' . $path . '"></script>';
 		} else {
 			$this->debugMessage[] = 'ERROR: Datei konnte nicht geladen werden. (Path = ' . $path . ')';
@@ -74,7 +74,7 @@ class Library_View {
 		$path = DS . 'public' . DS . 'css' . DS . $fn . '.css';
 		
 		if (file_exists(ROOT . $path)) {
-			$this->debugMessages[] = 'SUCCESS: ' . $fn . ' - CSS-Datei wurde geladen.';
+			$this->debugMessages[] = 'SUCCESS: CSS-Datei wurde geladen. (' . $fn . ')';
 			return '<link type="text/css" rel="Stylesheet" media="' . $media . '" href="' . $path . '" />';
 		} else {
 			$this->debugMessage[] = 'ERROR: Datei konnte nicht geladen werden. (Path = ' . $path . ')';
