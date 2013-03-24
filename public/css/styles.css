@@ -1,0 +1,43 @@
+/* Floating */
+.cb { clear: both; }
+.fl { float: left; }
+.fr { float: right; }
+
+
+/* Position */
+.pr { position: relative; }
+.pa { position: absolute; }
+
+
+/* Display */
+.dn { display: none; }
+.db { display: block; }
+
+
+/* Padding */
+.p10 { padding: 10px; } 
+.pt10 { padding-top: 10px; }
+.pt20 { padding-top: 20px; }
+.pb10 { padding-bottom: 5px; }
+
+
+/* Width */
+.w190 { width: 190px; }
+.w195 { width: 195px; }
+.w475 { width: 475px; }
+.w485 { width: 485px; }
+
+
+/* Font */
+.fs11 { font-size: 11px; }
+.fs12 { font-size: 12px; }
+
+.fwb { font-weight: bold; }
+
+
+/* Margin */
+.m0a { margin: 0 auto; }
+
+
+/* Text-Align */
+.tac { text-align: center; }
