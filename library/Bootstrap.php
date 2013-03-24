@@ -6,10 +6,7 @@ class Library_Bootstrap {
 		$url = rtrim($url, '/');
 		$url = explode('/', $url);
 
-		//var_dump($url);
-		//var_dump($_SERVER);
-
-		// Standard-Seite
+		// Default-Site
 		if (empty($url[0])) {
 			require_once ROOT . 'app' . DS . 'controllers' . DS . 'index.php';
 			$controller = new App_Controllers_Index();
@@ -17,23 +14,25 @@ class Library_Bootstrap {
 			return false;
 		}
 
-		// Controller initialisieren
+		// Initialization of the controller
 		$controller = new $url[0];
-
-		// Model initialisieren
+		
+		// Initialization of the modell
 		$controller->loadModel($url[0]);
 
-		// Methode aufrufen
-		if(isset($url[1])) {
-			if(method_exists($controller, $url[1])) {
-				// Funktion im Controller ausführen
-				if(isset($url[2])) {
-					var_dump($controller);
+		// Calling a method when it has been set
+		if (isset($url[1])) {
+			
+			// Call the method, if it exists
+			if (method_exists($controller, $url[1])) {
+				
+				// Calling the method with a parameter when it is set
+				if (isset($url[2])) {
 					$controller->{$url[1]}($url[2]);
-				}else{
+				} else {
 					$controller->{$url[1]}();
 				}
-			}else{
+			} else {
 				$controller = $this->getErrorPage();
 			}
 			return false;
@@ -45,7 +44,7 @@ class Library_Bootstrap {
 	
 	
 	/**
-	 * Läd den Controller der Error-Page
+	 * Initialization of the controller of the error page
 	 * 
 	 * @return Error $con
 	 */
