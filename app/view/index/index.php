@@ -73,8 +73,8 @@
 <?php foreach ($this->gb as $entry) { ?>
 	<?php if ($entry->Status == 1) { ?>
 		<section class="gaestebuchEintrag" id="eintrag<?php echo $entry->ID ?>">
-			<div class="bewertung star<?php echo $entry->Bewertung ?>"></div>
-			<strong>Datum: </strong><?php echo $entry->Datum ?><br />
+			<div class="bewertung star<?php echo $entry->Valuation ?>"></div>
+			<strong>Datum: </strong><?php echo $entry->Date ?><br />
 			<strong>Name: </strong>
 			<?php $url = $entry->Website ?>
 			<?php if (!empty($url)) { ?>
@@ -87,7 +87,7 @@
 		<hr />
 			<div class="beitrag">
 				<span class="db pb5 fwb">Beitrag:</span>
-				<?php echo nl2br(htmlspecialchars($entry->Text)) ?>
+				<?php echo nl2br(htmlspecialchars($entry->Message)) ?>
 			</div>
 		</section>
 	<?php } ?>

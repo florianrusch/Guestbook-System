@@ -25,17 +25,16 @@ class Library_View {
 	 * @return boolean
 	 */
 	public function renderView($name) {
-		$globalPaths = array(
-			'header' => ROOT . 'app' . DS . 'view' . DS . $this->header,
+		$paths = array(
+			'header' => $this->header,
 			'content' => ROOT . 'app' . DS . 'view' . DS . $name . '.php',
-			'footer' => ROOT . 'app' . DS . 'view' . DS . $this->footer
+			'footer' => $this->footer
 		);
 		
-		foreach ($globalPaths as $key => $value) {
-			var_dump($key);
+		foreach ($paths as $key => $value) {
 			if (file_exists($value)) {
-				require_once $value;
 				$this->debugMessages[] = 'SUCCESS: ' . $key . '-Template wurde geladen.';
+				require_once $value;
 			} else {
 				$this->debugMessages[] = 'ERROR: Das ' . $key . '-Template ist nicht vorhanden. (Path = ' . $value . ')';
 			}
@@ -53,7 +52,7 @@ class Library_View {
 	public function getJsInclude($fn) {
 		$path = DS . 'public' . DS . 'js' . DS . $fn . '.js';
 		
-		if (file_exists($_SERVER['DOCUMENT_ROOT'] . $path)) {
+		if (file_exists(ROOT . $path)) {
 			$this->debugMessages[] = 'SUCCESS: ' . $fn . '-Javascript wurde geladen.';
 			return '<script src="' . $path . '"></script>';
 		} else {
@@ -74,7 +73,7 @@ class Library_View {
 	public function getCssInclude($fn, $media = 'all') {
 		$path = DS . 'public' . DS . 'css' . DS . $fn . '.css';
 		
-		if (file_exists($_SERVER['DOCUMENT_ROOT'] . $path)) {
+		if (file_exists(ROOT . $path)) {
 			$this->debugMessages[] = 'SUCCESS: ' . $fn . ' - CSS-Datei wurde geladen.';
 			return '<link type="text/css" rel="Stylesheet" media="' . $media . '" href="' . $path . '" />';
 		} else {
@@ -92,10 +91,12 @@ class Library_View {
 	 * @return boolean
 	 */
 	public function setHeader($path) {
-		if(file_exists(ROOT  . 'app' . DS . 'view' . DS . $path)) {
+		$path = ROOT . 'app' . DS . 'view' . DS . $path;
+		if (file_exists($path)) {
 			$this->header = $path;
+			$this->debugMessages[] = 'SUCCESS: header-Datei wurde gesetzt. (Path = ' . $path . ')';
 			return true;
-		}else{
+		} else {
 			$this->debugMessage[] = 'ERROR: Datei konnte nicht geladen werden. (Path = ' . $path . ')';
 			return false;
 		}
@@ -110,11 +111,13 @@ class Library_View {
 	 * @return boolean
 	 */
 	public function setFooter($path) {
-		if(file_exists(ROOT . 'app' . DS . 'view' . DS . $path)) {
+		$path = ROOT . 'app' . DS . 'view' . DS . $path;
+		if (file_exists($path)) {
 			$this->footer = $path;
+			$this->debugMessages[] = 'SUCCESS: footer-Datei wurde gesetzt. (Path = ' . $path . ')';
 			return true;
-		}else{
-			echo "Couldn't load: " . $path;
+		} else {
+			$this->debugMessage[] = 'ERROR: Datei konnte nicht geladen werden. (Path = ' . $path . ')';
 			return false;
 		}
 	}
@@ -122,7 +125,7 @@ class Library_View {
 	
 	public function getDebugLog() {
 		$return = '<div id="debugLog">';
-		foreach($this->debugMessages as $mes) {
+		foreach ($this->debugMessages as $mes) {
 			$return .= '>> ' . $mes . '<br />';
 		}
 		$return .= '</div>';

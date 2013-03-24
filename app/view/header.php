@@ -7,10 +7,10 @@
 		<meta http-equiv="Content-Language" content="de-DE" />
 		
 		<title>XML-Projekt von Florian Rusch (IT10B) - Gästebuch</title>
-		
+
 		<?php echo $this->getCssInclude('screen') ?>
-		<?php echo $this->getCssInclude('styles', true) ?>
-		<?php echo $this->getJsInclude('jQuery-1.9.1.min', true) ?>
+		<?php echo $this->getCssInclude('styles') ?>
+		<?php echo $this->getJsInclude('jQuery-1.9.1.min') ?>
 	</head>
 
 	<body>
