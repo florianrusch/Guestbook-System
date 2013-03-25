@@ -3,8 +3,8 @@
 class Library_View {
 	
 	private $header,
-			$footer,
-			$debugMessages = array();
+		$footer,
+		$debugMessages = array();
 	
 	
 	public function __construct() {
@@ -33,7 +33,6 @@ class Library_View {
 		
 		foreach ($paths as $key => $value) {
 			if (file_exists($value)) {
-				$this->debugMessages[] = 'SUCCESS: Template wurde geladen. (' . $key . ')';
 				require_once $value;
 			} else {
 				$this->debugMessages[] = 'ERROR: Das ' . $key . '-Template ist nicht vorhanden. (Path = ' . $value . ')';
@@ -53,7 +52,6 @@ class Library_View {
 		$path = DS . 'public' . DS . 'js' . DS . $fn . '.js';
 		
 		if (file_exists(ROOT . $path)) {
-			$this->debugMessages[] = 'SUCCESS: Javascript-Datei wurde geladen. (' . $fn . ')';
 			return '<script src="' . $path . '"></script>';
 		} else {
 			$this->debugMessage[] = 'ERROR: Datei konnte nicht geladen werden. (Path = ' . $path . ')';
@@ -74,7 +72,6 @@ class Library_View {
 		$path = DS . 'public' . DS . 'css' . DS . $fn . '.css';
 		
 		if (file_exists(ROOT . $path)) {
-			$this->debugMessages[] = 'SUCCESS: CSS-Datei wurde geladen. (' . $fn . ')';
 			return '<link type="text/css" rel="Stylesheet" media="' . $media . '" href="' . $path . '" />';
 		} else {
 			$this->debugMessage[] = 'ERROR: Datei konnte nicht geladen werden. (Path = ' . $path . ')';
@@ -94,7 +91,6 @@ class Library_View {
 		$path = ROOT . 'app' . DS . 'view' . DS . $path;
 		if (file_exists($path)) {
 			$this->header = $path;
-			$this->debugMessages[] = 'SUCCESS: header-Datei wurde gesetzt. (Path = ' . $path . ')';
 			return true;
 		} else {
 			$this->debugMessage[] = 'ERROR: Datei konnte nicht geladen werden. (Path = ' . $path . ')';
@@ -114,7 +110,6 @@ class Library_View {
 		$path = ROOT . 'app' . DS . 'view' . DS . $path;
 		if (file_exists($path)) {
 			$this->footer = $path;
-			$this->debugMessages[] = 'SUCCESS: footer-Datei wurde gesetzt. (Path = ' . $path . ')';
 			return true;
 		} else {
 			$this->debugMessage[] = 'ERROR: Datei konnte nicht geladen werden. (Path = ' . $path . ')';
