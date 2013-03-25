@@ -1,10 +1,19 @@
 <?php
 
-require_once 'etc/utils.php';
-require_once 'config/config.inc.php';
-
 define('DS', DIRECTORY_SEPARATOR);
 define('ROOT', dirname(__FILE__).DS);
+
+$utilsPath = ROOT . 'etc' . DS . 'utils.php';
+$configPath = ROOT . 'config' . DS . 'config.inc.php';
+
+if (is_readable($configPath)) {
+	require_once $configPath;
+} else {
+	echo 'ERROR!! Die Config-Datei fehlt oder ist nicht lesbar!';
+	die();
+}
+require_once $utilsPath;
+
 
 $url = isset($_GET['url']) ? $_GET['url'] : '';
 
