@@ -4,64 +4,73 @@
 		<fieldset>
 			<legend class="text-center">Neuer Gästebucheintrag</legend>
 			<div class="row-fluid">
-				<div class="span5">
-					<label for="fName">Name:*</label>
-					<div class="controls">
-						<div class="input-prepend span11">
-							<span class="add-on"><i class="icon-user"></i></span>
-							<input id="fName" type="text" name="name" class="span11" placeholder="Max Mustermann" />
+				<div class="row-fluid">
+					<div class="span5">
+						<label for="fName">Name:*</label>
+						<div class="controls">
+							<div class="input-prepend span11">
+								<span class="add-on"><i class="icon-user"></i></span>
+								<input id="fName" type="text" name="name" class="span11" placeholder="Max Mustermann" />
+							</div>
 						</div>
-					</div>
-					<div class="clearfix"></div>
+						<div class="clearfix"></div>
 
-					<label for="fValuation">Bewertung der Seite:*</label>
-					<div class="controls">
-						<div class="input-prepend span11">
-							<span class="add-on"><i class="icon-star"></i></span>
-							<select id="fValuation" class="span11" name="valuation">
-								<option value="3">Die Seite ist echt super</option>
-								<option value="2">Die Seite ist ganz okay</option>
-								<option value="1">Die Seite ist verbesserungswürdig</option>
-								<option value="0">Die Seite ist einfach nur schlecht</option>
-							</select>
+						<label for="fValuation">Bewertung der Seite:*</label>
+						<div class="controls">
+							<div class="input-prepend span11">
+								<span class="add-on"><i class="icon-star"></i></span>
+								<select id="fValuation" class="span11" name="valuation">
+									<option value="3">Die Seite ist echt super</option>
+									<option value="2">Die Seite ist ganz okay</option>
+									<option value="1">Die Seite ist verbesserungswürdig</option>
+									<option value="0">Die Seite ist einfach nur schlecht</option>
+								</select>
+							</div>
 						</div>
-					</div>
-					<div class="clearfix"></div>
+						<div class="clearfix"></div>
 
 
-					<label for="fLiame">E-Mail:</label>
-					<div class="controls">
-						<div class="input-prepend span11">
-							<span class="add-on"><i class="icon-envelope"></i></span>
-							<input id="fLiame" type="email" name="liame" class="span11" placeholder="max@mustermann.de" />
+						<label for="fLiame">E-Mail:</label>
+						<div class="controls">
+							<div class="input-prepend span11">
+								<span class="add-on"><i class="icon-envelope"></i></span>
+								<input id="fLiame" type="email" name="liame" class="span11" placeholder="max@mustermann.de" />
+							</div>
 						</div>
-					</div>
-					<div class="clearfix"></div>
+						<div class="clearfix"></div>
 
 
-					<label for="fUrl">Website:</label>
-					<div class="controls">
-						<div class="input-prepend span11">
-							<span class="add-on"><i class="icon-globe"></i></span>
-							<input id="fUrl" type="text" name="url" class="span11" placeholder="www.mustermann.de" />
+						<label for="fUrl">Website:</label>
+						<div class="controls">
+							<div class="input-prepend span11">
+								<span class="add-on"><i class="icon-globe"></i></span>
+								<input id="fUrl" type="text" name="url" class="span11" placeholder="www.mustermann.de" />
+							</div>
 						</div>
+						<div class="clearfix"></div>
 					</div>
-					<div class="clearfix"></div>
+
+					<div class="span7">
+						<label for="fComment">Ihr Eintrag:*</label>
+						<textarea id="fComment" name="comment" class="span12" rows="11"></textarea>
+					</div>
 				</div>
 
-				<div class="span7">
-					<label for="fComment">Ihr Eintrag:*</label>
-					<textarea id="fComment" name="comment" class="span12" rows="11"></textarea>
+				<div class="row">
+					<br /><br />
 				</div>
 
-				<div class="clearfix"></div>
-				<br /><br />
-
-				<div class="text-center">
-					<button type="submit" class="submit btn btn-primary">Abschicken</button>
-					<button type="button" class="cancel btn">Abbrechen</button>
-					<br />
-					*: Pflichtfelder
+				
+				<div class="row-fluid text-center">
+					<div class="span2 offset4">
+						<button type="submit" class="btn-success btn span12">Abschicken</button>
+					</div>
+					<div class="span2">
+						<button type="button" class="btn-danger btn span12">Abbrechen</button>
+					</div>
+					<div class="span2 offset2 text-right">
+						<span class="help-block">* Pflichtfelder</span>
+					</div>
 				</div>
 			</div>
 		</fieldset>
