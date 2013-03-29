@@ -7,25 +7,7 @@
  */
 function __autoload($str) {
 	$str = str_replace('_', '/', $str);
-	
-	/* Wenn Klasse im "Lib"-Ordner liegt, alles bis auf die Datei klein
-	  interpretieren, ansonsten alles auch die Datei klein interpretieren */
-	if (strpos($str, 'library/') !== false || strpos($str, 'Library/') !== false) {
-		
-		// Array aus dem String erstellen
-		$str = explode('/', $str);
-		
-		// Alles bis auf das letzte Array-Element klein schreiben
-		for ($i = 0; $i < (count($str) - 1); $i++) {
-			$str[$i] = strtolower($str[$i]);
-		}
-
-		// Array wieder zu einem String machen
-		$str = implode(DS, $str);
-		
-	}else{
-		$str = strtolower($str);
-	}
+	$str = strtolower($str);
 	require_once $str . '.php';
 }
 
