@@ -39,17 +39,17 @@
 									</a>
 								</li>
 								<li>
-									<a href="/exportPDF.php" title="Gästebuch Einträge - PDF Export" target="_blank">
+									<a href="/export/xml/" title="Gästebuch Einträge - PDF Export" target="_blank">
 										XML-Export
 									</a>
 								</li>
 								<li>
-									<a href="/exportPDF.php" title="Gästebuch Einträge - PDF Export" target="_blank">
+									<a href="/export/pdf/" title="Gästebuch Einträge - PDF Export" target="_blank">
 										PDF-Export
 									</a>
 								</li>
 								<li>
-									<a href="/exportDia.php" title="Gästebuch - Statistik  - JPG Export" target="_blank">
+									<a href="/export/img/" title="Gästebuch - Statistik  - JPG Export" target="_blank">
 										JPG-Export
 									</a>
 								</li>

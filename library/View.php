@@ -24,19 +24,22 @@ class Library_View {
 	 * @param boolean $noInclude
 	 * @return boolean
 	 */
-	public function renderView($name) {
+	public function renderView($name, $global = true) {
 		$paths = array(
 			'header' => $this->header,
 			'content' => ROOT . 'app' . DS . 'view' . DS . $name . '.php',
 			'footer' => $this->footer
 		);
-		
-		foreach ($paths as $key => $value) {
-			if (file_exists($value)) {
-				require_once $value;
-			} else {
-				$this->debugMessages[] = 'ERROR: Das ' . $key . '-Template ist nicht vorhanden. (Path = ' . $value . ')';
+		if ($global) {
+			foreach ($paths as $key => $value) {
+				if (file_exists($value)) {
+					require_once $value;
+				} else {
+					$this->debugMessages[] = 'ERROR: Das ' . $key . '-Template ist nicht vorhanden. (Path = ' . $value . ')';
+				}
 			}
+		} else {
+			require_once $paths['content'];
 		}
 	}
 	
