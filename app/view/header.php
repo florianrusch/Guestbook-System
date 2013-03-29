@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="de">
 	<head>
 		<meta charset="UTF-8" />
 		<meta http-equiv="Content-Script-Type" content="text/javascript" />
@@ -8,53 +8,55 @@
 		
 		<title>XML-Projekt von Florian Rusch (IT10B) - Gästebuch</title>
 
+		<?php echo $this->getCssInclude('bootstrap.min') ?>
 		<?php echo $this->getCssInclude('screen') ?>
 		<?php echo $this->getCssInclude('styles') ?>
-		<?php echo $this->getJsInclude('jQuery-1.9.1.min') ?>
+		
 	</head>
 
 	<body>
-		<div id="wrapper">
-			<header>
-				<h1>
-					Gästebuch
-				</h1>
-				<h2>
-					XML-Projekt von Florian Rusch (IT10B)
-				</h2>
+		<div class="container">
+			<header class="row-fluid">
+				<div class="row-fluid">
+					<div class="page-header span12 text-center">
+						<h1>
+							Gästebuch System<br />
+							<small>Ein XML-Projekt von Florian Rusch (IT10B)</small>
+						</h1>
+					</div>
+				</div>
+				<div class="row-fluid"></div>
 				
-				<nav>
-					<ul>
-						<li>
-							<a href="/" title="Gästebuch Einträge" class="current">
-								Gästebuch Einträge<br />
-								Web-Ansicht
-							</a>
-						</li>
-						<li>
-							<a href="/exportPDF.php" title="Gästebuch Einträge - PDF Export" target="_blank">
-								Gästebuch Einträge<br />
-								PDF-Export
-							</a>
-						</li>
-						<li>
-							<a href="/webDia.php" title="Gästebuch - Statistik">
-								Gästebuch Statistik<br />
-								Web-Ansicht
-							</a>
-						</li>
-						<li>
-							<a href="/exportDia.php" title="Gästebuch - Statistik  - JPG Export" target="_blank">
-								Gästebuch Statistik<br />
-								JPG-Export
-							</a>
-						</li>
-					</ul>
-				</nav>
-				
-				
-				<div class="abbinder"></div>
+				<div class="row-fluid">
+					<nav class="navbar">
+						<div class="navbar-inner text-center">
+							<ul class="nav">
+								<li class="active">
+									<a href="/" title="Gästebuch Einträge">
+										Web-Ansicht
+									</a>
+								</li>
+								<li>
+									<a href="/exportPDF.php" title="Gästebuch Einträge - PDF Export" target="_blank">
+										XML-Export
+									</a>
+								</li>
+								<li>
+									<a href="/exportPDF.php" title="Gästebuch Einträge - PDF Export" target="_blank">
+										PDF-Export
+									</a>
+								</li>
+								<li>
+									<a href="/exportDia.php" title="Gästebuch - Statistik  - JPG Export" target="_blank">
+										JPG-Export
+									</a>
+								</li>
+							</ul>
+						</div>
+					</nav>
+				</div>
 			</header>
-
-		
-			<section id="content">
+			
+			<div clas="row">
+				<br /><br />
+			</div>

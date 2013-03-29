@@ -1,99 +1,123 @@
-<?php
-	if (!empty($error) && count($error) != 0) {
-		echo '<div class="error">';
-			echo '<div>';
-				echo '<div class="headline">Fehler:</div>';
-				echo $errorMessage;
-			echo '</div>';
-		echo '</div>';
-	} else if(!empty($_GET['success'])) {
-		echo '<div class="success">';
-			echo '<div>';
-				echo 'Gästebuch-Eintrag erfolgreich gespeichert.';
-			echo '</div>';
-		echo '</div>';
-	}
-?>
+
+<section class="row-fluid">
+	<form action="" method="POST" class="well span10 offset1">
+		<fieldset>
+			<legend class="text-center">Neuer Gästebucheintrag</legend>
+			<div class="row-fluid">
+				<div class="span5">
+					<label for="fName">Name:*</label>
+					<div class="controls">
+						<div class="input-prepend span11">
+							<span class="add-on"><i class="icon-user"></i></span>
+							<input id="fName" type="text" name="name" class="span11" placeholder="Max Mustermann" />
+						</div>
+					</div>
+					<div class="clearfix"></div>
+
+					<label for="fValuation">Bewertung der Seite:*</label>
+					<div class="controls">
+						<div class="input-prepend span11">
+							<span class="add-on"><i class="icon-star"></i></span>
+							<select id="fValuation" class="span11" name="valuation">
+								<option value="3">Die Seite ist echt super</option>
+								<option value="2">Die Seite ist ganz okay</option>
+								<option value="1">Die Seite ist verbesserungswürdig</option>
+								<option value="0">Die Seite ist einfach nur schlecht</option>
+							</select>
+						</div>
+					</div>
+					<div class="clearfix"></div>
 
 
+					<label for="fLiame">E-Mail:</label>
+					<div class="controls">
+						<div class="input-prepend span11">
+							<span class="add-on"><i class="icon-envelope"></i></span>
+							<input id="fLiame" type="email" name="liame" class="span11" placeholder="max@mustermann.de" />
+						</div>
+					</div>
+					<div class="clearfix"></div>
 
-<form id="gaestebuchForm" action="" method="POST">
-	<input type="hidden" name="submitCheck" value="send" />
 
-	<div class="fl">
-		<label for="fName"<?php if(!empty($error) && in_array('name', $error)) { echo ' class="error"'; } ?>>Name:*</label><br />
-		<input id="fName" type="text" name="name" size="35"<?php if(!empty($error) && in_array('name', $error)) { echo ' class="error"'; } ?><?php if(!empty($_POST['name'])) echo ' value="' . $_POST['name'] . '"' ?> /><br />
-		<br />
+					<label for="fUrl">Website:</label>
+					<div class="controls">
+						<div class="input-prepend span11">
+							<span class="add-on"><i class="icon-globe"></i></span>
+							<input id="fUrl" type="text" name="url" class="span11" placeholder="www.mustermann.de" />
+						</div>
+					</div>
+					<div class="clearfix"></div>
+				</div>
 
-		<div>
-			<div class="fl"><label for="fValuation">Bewertung der Seite:*</label><br />
-				<span class="fs12">(4 = gut, 1 = schlecht)</span>
+				<div class="span7">
+					<label for="fComment">Ihr Eintrag:*</label>
+					<textarea id="fComment" name="comment" class="span12" rows="11"></textarea>
+				</div>
+
+				<div class="clearfix"></div>
+				<br /><br />
+
+				<div class="text-center">
+					<button class="submit" type="submit" class="btn btn-primary">Abschicken</button>
+					<button class="cancel" type="button" class="btn ">Abbrechen</button>
+					<br />
+					*: Pflichtfelder
+				</div>
 			</div>
-			<div class="fr pt10">
-				<select id="fValuation" name="valuation">
-					<option<?php if(!empty($_POST['valuation']) && $_POST['valuation'] == 4) echo ' selected' ?>>4</option>
-					<option<?php if(!empty($_POST['valuation']) && $_POST['valuation'] == 3) echo ' selected' ?>>3</option>
-					<option<?php if(!empty($_POST['valuation']) && $_POST['valuation'] == 2) echo ' selected' ?>>2</option>
-					<option<?php if(!empty($_POST['valuation']) && $_POST['valuation'] == 1) echo ' selected' ?>>1</option>
-				</select>
-			</div>
-			<div class="cb"></div>
-		</div>
-		<br />
+		</fieldset>
+	</form>
+</section>
 
 
-		<label for="fLiame">E-Mail:</label><br />
-		<input id="fLiame" type="text" name="liame" size="35"<?php if(!empty($_POST['liame'])) echo ' value="' . $_POST['liame'] . '"' ?> /><br />
-		<br />
+<div class="row">
+	<br /><br />
+</div>
 
-
-		<label for="fUrl">Website:</label><br />
-		<input id="fUrl" type="text" name="url" size="35"<?php if(!empty($_POST['url'])) echo ' value="' . $_POST['url'] . '"' ?> /><br />
+<div class="row-fluid">
+	<div class="row-fluid">
+		<h2 class="span12 text-center">Einträge</h2>
 	</div>
+	<?php
+		foreach ($this->gb as $entry) {
+			if ($entry->Status == 1) {
 
-	<div class="fr">
-		<label for="fComment"<?php if(!empty($error) && in_array('comment', $error)) { echo ' class="error"'; } ?>>Ihr Eintrag:*</label><br />
-		<textarea id="fComment" name="comment" cols="62" rows="12"<?php if(!empty($error) && in_array('comment', $error)) { echo ' class="error"'; } ?>><?php if(!empty($_POST['comment'])) echo $_POST['comment'] ?></textarea>
-	</div>
-	<div class="cb"></div>
+				if (!empty($entry->Website)) {
+					$html = '<a href="http://' . $entry->Website . '" title="Zur Website - ' . $entry->Website . '" rel="nofollow" target="_blank">';
+						$html .= $entry->Name;
+					$html .= '</a>';
+				} else {
+					$html = $entry->Name;
+				}
+	?>
+				<section class="row-fluid">
+					<div class="span8 offset2 well">
+						<div class="row-fluid">
+							<div class="span5"><b><i class="icon-user"></i></b> <?php echo $html ?></div>
+							
+							<div class="span3" style="min-height: 10px !important">
+								<b><i class="icon-calendar"></i></b> <?php echo $entry->Date ?>
+							</div>
+							
+							<div class="span4 text-right">
+								<?php for ($i = 0; $i < $entry->Valuation; $i++) { ?>
+									<i class="icon-star"></i>
+								<?php } ?>
+							</div>
+						</div>
+						
+						<div class="row-fluid">
+							<hr />
+						</div>
 
-	<div class="m0a tac">
-		<input type="submit" name="submit" value="Abschicken" /><br />
-		<span class="fs11">* Diese Felder müssen ausgefüllt werden!!</span>
-	</div>
-	<div class="cb"></div>
-</form>
-
-
-<br />
-<br />
-
-
-<h2>Einträge</h2>
-<?php foreach ($this->gb as $entry) { ?>
-	<?php if ($entry->Status == 1) { ?>
-		<section class="gaestebuchEintrag" id="eintrag<?php echo $entry->ID ?>">
-			<div class="bewertung star<?php echo $entry->Valuation ?>"></div>
-			<strong>Datum: </strong><?php echo $entry->Date ?><br />
-			<strong>Name: </strong>
-			<?php $url = $entry->Website ?>
-			<?php if (!empty($url)) { ?>
-				<a href="http://<?php echo $url ?>" title="Zur Website - <?php echo $url ?>" rel="nofollow" target="_blank">
-			<?php } ?>
-					<?php echo htmlspecialchars($entry->Name) ?>
-			<?php if (!empty($url)) { ?>
-				</a>
-			<?php } ?>	
-		<hr />
-			<div class="beitrag">
-				<span class="db pb5 fwb">Beitrag:</span>
-				<?php echo nl2br(htmlspecialchars($entry->Message)) ?>
-			</div>
-		</section>
-	<?php } ?>
-<?php } ?>
-<script>
-	jQuery(window).load(function() {
-		jQuery('div#wrapper').fadeIn(3000);
-	});
-</script>
+						<div class="row-fluid">
+							<b>Beitrag:</b><br />
+							<?php echo $entry->Message ?>
+						</div>
+					</div>
+					
+				</section>
+	<?php
+			}
+		}
+	?>
+</div>
