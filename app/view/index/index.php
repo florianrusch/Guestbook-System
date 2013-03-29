@@ -58,8 +58,8 @@
 				<br /><br />
 
 				<div class="text-center">
-					<button class="submit" type="submit" class="btn btn-primary">Abschicken</button>
-					<button class="cancel" type="button" class="btn ">Abbrechen</button>
+					<button type="submit" class="submit btn btn-primary">Abschicken</button>
+					<button type="button" class="cancel btn">Abbrechen</button>
 					<br />
 					*: Pflichtfelder
 				</div>
@@ -121,3 +121,17 @@
 		}
 	?>
 </div>
+
+
+
+<script>
+	jQuery('form button.cancel').click(function() {
+		form = jQuery(this).parents('form')
+		form.find('input').each(function() {
+			jQuery(this).val('');
+		});
+		form.find('textarea').each(function() {
+			jQuery(this).val('');
+		});
+	});
+</script>

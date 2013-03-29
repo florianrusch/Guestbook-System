@@ -12,6 +12,8 @@
 		<?php echo $this->getCssInclude('screen') ?>
 		<?php echo $this->getCssInclude('styles') ?>
 		
+		<?php echo $this->getJsInclude('jQuery-1.9.1.min') ?>
+		<?php echo $this->getJsInclude('bootstrap.min') ?>
 	</head>
 
 	<body>
