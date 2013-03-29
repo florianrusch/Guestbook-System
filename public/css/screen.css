@@ -12,12 +12,9 @@ hr {
 	margin: 5px 0;
 }
 
-body {
-	background: rgb(247, 247, 247);
-}
-
 .well {
-	background: rgb(201, 201, 201);
+	background: rgb(243, 243, 243);
+	border-color: rgb(207, 207, 207);
 }
 
 a:hover, a:focus {
