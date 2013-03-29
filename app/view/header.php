@@ -39,7 +39,7 @@
 									</a>
 								</li>
 								<li>
-									<a href="/export/xml/" title="Gästebuch Einträge - PDF Export" target="_blank">
+									<a href="/export/xml/" title="Gästebuch Einträge - PDF Export" >
 										XML-Export
 									</a>
 								</li>
