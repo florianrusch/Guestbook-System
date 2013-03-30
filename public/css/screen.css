@@ -63,6 +63,6 @@ a {
 
 
 .navbar .nav li .dropdown-menu:after,
-.navbar .nav>li>.dropdown-menu:before {
+.navbar .nav li .dropdown-menu:before {
 	display:none;
 }
