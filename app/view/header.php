@@ -48,10 +48,19 @@
 										PDF-Export
 									</a>
 								</li>
-								<li>
-									<a href="/export/img/" title="Gästebuch - Statistik  - JPG Export">
-										JPG-Export
+								<li class="dropdown">
+									<a class="dropdown-toggle" href="/export/img/" title="Gästebuch - Statistik  - JPG Export" data-toggle="dropdown" target="_blank">
+										JPG-Export<b class="caret"></b>
 									</a>
+									<ul class="dropdown-menu">
+										<?php foreach($this->years as $y) { ?>
+											<li>
+												<a href="/export/img/<?php echo $y->Date ?>" title="Gästebuch Einträge - Statistik - Jahr <?php echo $y->Date ?>" target="_blank">
+													<?php echo $y->Date ?>
+												</a>
+											</li>
+										<?php } ?>
+									</ul>
 								</li>
 							</ul>
 						</div>

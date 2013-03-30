@@ -6,7 +6,7 @@ class Library_Database extends PDO {
 	public function __construct() {
 		try {
 			// Die Konstanten kommen aus der /config/config.inc.php
-			parent::__construct('mysql:host='.DB_HOST.";dbname=".DB_NAME.';charset=UTF-8', DB_USER, DB_PASSWORD);
+			parent::__construct('mysql:host=' . DB_HOST . ";dbname=" . DB_NAME . ';charset=UTF-8', DB_USER, DB_PASSWORD);
 		} catch (PDOException $e) {
 			echo $e->getMessage();
 			die();

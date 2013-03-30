@@ -12,6 +12,7 @@ class App_Controllers_Index extends Library_Controller {
 	
 	public function index() {
 		$this->view->gb = parent::loadModel('Entries')->getAllEntries();
+		$this->view->years = parent::loadModel('Entries')->getAllYears();
 		$this->view->renderView('index' . DS . 'index');
 	}
 	

@@ -108,7 +108,7 @@
 							</div>
 							
 							<div class="span4 text-right">
-								<?php for ($i = 0; $i < $entry->Valuation; $i++) { ?>
+								<?php for ($i = 0; $i <= $entry->Valuation; $i++) { ?>
 									<i class="icon-star"></i>
 								<?php } ?>
 							</div>

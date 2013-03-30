@@ -6,9 +6,14 @@
  * @param string $str 
  */
 function __autoload($str) {
+	$arrayStr = explode('_', $str);
 	$str = str_replace('_', '/', $str);
-	$str = strtolower($str);
-	require_once $str . '.php';
+	
+	if (count($arrayStr) >= 2) {
+		require_once strtolower($str) . '.php';
+	} else {
+		require_once 'library/extern/' . $str . '.php';
+	}
 }
 
 
