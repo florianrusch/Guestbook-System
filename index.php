@@ -1,6 +1,6 @@
 <?php
 
-define('DS', DIRECTORY_SEPARATOR);
+define('DS', '/');
 define('ROOT', dirname(__FILE__).DS);
 
 $utilsPath = ROOT . 'etc' . DS . 'utils.php';
