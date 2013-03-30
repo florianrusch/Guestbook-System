@@ -60,3 +60,9 @@ a {
 	box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.125) !important;
 	background-image:none !important;
 }
+
+
+.navbar .nav li .dropdown-menu:after,
+.navbar .nav>li>.dropdown-menu:before {
+	display:none;
+}
