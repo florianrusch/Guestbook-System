@@ -1,7 +1,7 @@
 <?php
 
 define('DS', '/');
-define('ROOT', dirname(__FILE__).DS);
+define('ROOT', dirname(__FILE__) . DS);
 
 $utilsPath = ROOT . 'etc' . DS . 'utils.php';
 $configPath = ROOT . 'config' . DS . 'config.inc.php';

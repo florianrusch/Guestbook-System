@@ -6,8 +6,8 @@ class App_Model_Entries extends Library_Model {
 		parent::__construct();
 	}
 	
-	public function getAllEntries($where = array(), $sortBy = 'Date', $sortWay = 'DESC') {
-		$stmt = $this->db->query('SELECT * FROM `guestbook-entries` ORDER BY `guestbook-entries`.`' . $sortBy . '` ' . $sortWay);
+	public function getAllEntries() {
+		$stmt = $this->db->query('SELECT * FROM `guestbook-entries` ORDER BY `Date` DESC, `ID` DESC;');
 		return $this->db->fetchObj($stmt);
 	}
 	
@@ -32,7 +32,7 @@ class App_Model_Entries extends Library_Model {
 			$keys[] = $k;
 			$values[] = '?';
 		}
-		$stmt = $this->db->insertQuery($para);
+		return $this->db->insertQuery($para);
 	}
 }
 
