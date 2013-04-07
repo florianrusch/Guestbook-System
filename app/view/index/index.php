@@ -1,6 +1,22 @@
+<?php if (count($this->formMessage) > 0) { ?>
+	<section class="row-fluid">
+		<span class="alert alert-<?php echo $this->formMessage['status'] ?> span10 offset1">
+			<?php
+				unset($this->formMessage['status']);
+				foreach ($this->formMessage as $k => $v) {
+					echo $v . '<br />';
+				}
+			?>
+		</span>
+	</section>
+	<div class="row">
+		<br />
+	</div>
+<?php } ?>
+
 
 <section class="row-fluid">
-	<form action="" method="POST" class="well span10 offset1">
+	<form action="/index/newEntry/" method="POST" class="well span10 offset1">
 		<fieldset>
 			<legend class="text-center">Neuer Gästebucheintrag</legend>
 			<div class="row-fluid">
@@ -10,7 +26,7 @@
 						<div class="controls">
 							<div class="input-prepend span11">
 								<span class="add-on"><i class="icon-user"></i></span>
-								<input id="fName" type="text" name="name" class="span11" placeholder="Max Mustermann" />
+								<input id="fName" type="text" name="newEntry[name]" class="span11" placeholder="Max Mustermann" value="<?php echo $this->errorFieldsVal['name']; ?>" />
 							</div>
 						</div>
 						<div class="clearfix"></div>
@@ -19,11 +35,11 @@
 						<div class="controls">
 							<div class="input-prepend span11">
 								<span class="add-on"><i class="icon-star"></i></span>
-								<select id="fValuation" class="span11" name="valuation">
-									<option value="3">Die Seite ist echt super</option>
-									<option value="2">Die Seite ist ganz okay</option>
-									<option value="1">Die Seite ist verbesserungswürdig</option>
-									<option value="0">Die Seite ist einfach nur schlecht</option>
+								<select id="fValuation" class="span11" name="newEntry[valuation]">
+									<option value="3"<?php if ($this->errorFieldsVal['valuation'] == 3) echo 'selected'; ?>>Die Seite ist echt super</option>
+									<option value="2"<?php if ($this->errorFieldsVal['valuation'] == 2) echo 'selected'; ?>>Die Seite ist ganz okay</option>
+									<option value="1"<?php if ($this->errorFieldsVal['valuation'] == 1) echo 'selected'; ?>>Die Seite ist verbesserungswürdig</option>
+									<option value="0"<?php if ($this->errorFieldsVal['valuation'] == 0) echo 'selected'; ?>>Die Seite ist einfach nur schlecht</option>
 								</select>
 							</div>
 						</div>
@@ -34,7 +50,7 @@
 						<div class="controls">
 							<div class="input-prepend span11">
 								<span class="add-on"><i class="icon-envelope"></i></span>
-								<input id="fLiame" type="email" name="liame" class="span11" placeholder="max@mustermann.de" />
+								<input id="fLiame" type="email" name="newEntry[liame]" class="span11" placeholder="max@mustermann.de" value="<?php echo $this->errorFieldsVal['liame']; ?>" />
 							</div>
 						</div>
 						<div class="clearfix"></div>
@@ -44,7 +60,7 @@
 						<div class="controls">
 							<div class="input-prepend span11">
 								<span class="add-on"><i class="icon-globe"></i></span>
-								<input id="fUrl" type="text" name="url" class="span11" placeholder="www.mustermann.de" />
+								<input id="fUrl" type="text" name="newEntry[url]" class="span11" placeholder="www.mustermann.de" value="<?php echo $this->errorFieldsVal['url']; ?>" />
 							</div>
 						</div>
 						<div class="clearfix"></div>
@@ -52,7 +68,7 @@
 
 					<div class="span7">
 						<label for="fComment">Ihr Eintrag:*</label>
-						<textarea id="fComment" name="comment" class="span12" rows="11"></textarea>
+						<textarea id="fComment" name="newEntry[message]" class="span12" rows="11"><?php echo $this->errorFieldsVal['message']; ?></textarea>
 					</div>
 				</div>
 
@@ -87,7 +103,7 @@
 		<h2 class="span12 text-center">Einträge</h2>
 	</div>
 	<?php
-		foreach ($this->gb as $entry) {
+		foreach ($this->guestbookEntries as $entry) {
 			if ($entry->Status == 1) {
 
 				if (!empty($entry->Website)) {
@@ -101,7 +117,7 @@
 				<section class="row-fluid">
 					<div class="span8 offset2 well">
 						<div class="row-fluid">
-							<div class="span5"><b><i class="icon-user"></i></b> <?php echo $html ?></div>
+							<div class="span5"><b><i class="icon-user"></i></b> <?php echo utf8_encode($html) ?></div>
 							
 							<div class="span3" style="min-height: 10px !important">
 								<b><i class="icon-calendar"></i></b> <?php echo $entry->Date ?>
@@ -120,7 +136,7 @@
 
 						<div class="row-fluid">
 							<b>Beitrag:</b><br />
-							<?php echo $entry->Message ?>
+							<?php echo utf8_encode($entry->Message) ?>
 						</div>
 					</div>
 					

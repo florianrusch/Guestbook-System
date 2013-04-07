@@ -53,7 +53,7 @@
 										JPG-Export<b class="caret"></b>
 									</a>
 									<ul class="dropdown-menu">
-										<?php foreach($this->years as $y) { ?>
+										<?php foreach($this->subMenuImgYears as $y) { ?>
 											<li>
 												<a href="/export/img/<?php echo $y->Date ?>" title="Gästebuch Einträge - Statistik - Jahr <?php echo $y->Date ?>" target="_blank">
 													<?php echo $y->Date ?>

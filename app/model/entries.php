@@ -18,9 +18,21 @@ class App_Model_Entries extends Library_Model {
 		return $this->db->fetchObj($stmt);
 	}
 	
+	
 	public function getAllYears() {
 		$stmt = $this->db->query('SELECT YEAR(`Date`) as `Date` FROM `guestbook-entries` GROUP BY YEAR(`Date`) ORDER BY `Date` DESC');
 		return $this->db->fetchObj($stmt);
+	}
+	
+	
+	public function saveEntry($para) {
+		$keys = array();
+		$values = array();
+		foreach ($para as $k => $v) {
+			$keys[] = $k;
+			$values[] = '?';
+		}
+		$stmt = $this->db->insertQuery($para);
 	}
 }
 

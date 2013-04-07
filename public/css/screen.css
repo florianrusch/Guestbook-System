@@ -66,3 +66,25 @@ a {
 .navbar .nav li .dropdown-menu:before {
 	display:none;
 }
+
+
+
+.alert {
+	color: #fff;
+	text-shadow: none;
+}
+
+.alert-success {
+	background: #62c462;
+}
+.alert-error {
+	background: #ee5f5b;
+}
+
+
+
+input,
+select,
+textarea {
+	background: rgb(250, 250, 250) !important;
+}

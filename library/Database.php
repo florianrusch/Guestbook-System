@@ -11,11 +11,14 @@ class Library_Database extends PDO {
 			echo $e->getMessage();
 			die();
 		}
+		parent::setAttribute(parent::ATTR_ERRMODE, parent::ERRMODE_WARNING );  
 	}
+	
 	
 	public function query($stmt) {
 		return parent::query($stmt);
 	}
+	
 	
 	public function fetchObj($stmt) {
 		$stmt->setFetchMode(PDO::FETCH_OBJ);
@@ -27,6 +30,28 @@ class Library_Database extends PDO {
 	}
 	
 	
+	public function insertQuery($para) {
+		if (!is_array($para) || !count($para)) return false;
+		
+		$data = array();
+		foreach ($para as $k => $v) {
+			$data[':' . $k] = $v;
+		}
+		
+		
+		$bind = implode(', ', array_keys($data));
+		$sql  = 'INSERT INTO `guestbook-entries` (`' . implode('`, `', array_keys($para)) . '`) VALUES (' . $bind . ')';
+		try {
+			$stmt = parent::prepare($sql);
+		} catch (PDOException $exc) {
+			echo $exc->getMessage();
+		}
+		try {
+			$stmt = $stmt->execute($data);
+		} catch (PDOException $exc) {
+			echo $exc->getMessage();
+		}
+		return $stmt;
+	}
 }
-
 ?>
