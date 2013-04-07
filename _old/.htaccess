@@ -1,5 +1,0 @@
-RewriteEngine On
-RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /index\.(html?|php)\ HTTP/
-RewriteRule ^index\.(html?|php)$ http://xml.krueppelstadt.eu/ [R=301,L]
-RewriteCond %{HTTP_HOST} !^xml\.krueppelstadt\.eu$
-RewriteRule ^(.*)$ http://xml.krueppelstadt.eu/$1 [L,R=301]
