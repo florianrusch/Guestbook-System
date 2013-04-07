@@ -65,11 +65,12 @@ class App_Controllers_Export extends Library_Controller {
 		$myPicture->drawRectangle(0,0,799,279,array('R' => 0, 'G' => 0, 'B' => 0)); 
 
 		/* Write the chart title */  
-		$myPicture->setFontProperties(array('FontName' => 'public/fonts/HelveticaNeue-Medium.ttf', 'FontSize' => 11)); 
+		$myPicture->setFontProperties(array('FontName' => 'public' . DS . 'fonts' . DS  . 'helveticaneuemedium.ttf', 'FontSize' => 11)); 
+		
 		$myPicture->drawText(228, 43, 'Neue G&#228;stebuch-Eintr&#228;ge in ' . $year, array('FontSize' => 20, 'Align' => TEXT_ALIGN_BOTTOMMIDDLE)); 
 
 		/* Set the default font */ 
-		$myPicture->setFontProperties(array('FontName' => 'public/fonts/HelveticaNeue-Medium.ttf', 'FontSize' => 10)); 
+		$myPicture->setFontProperties(array('FontName' => 'public' . DS . 'fonts' . DS  . 'helveticaneuemedium.ttf', 'FontSize' => 10)); 
 
 		/* Define the chart area */ 
 		$myPicture->setGraphArea(60, 50, 780, 250); 
@@ -87,6 +88,101 @@ class App_Controllers_Export extends Library_Controller {
 
 		/* Render the picture (choose the best way) */ 
 		$myPicture->autoOutput(); 
+	}
+	
+	
+	public function pdf() {
+		$entries = parent::loadModel('Entries')->getAllEntries();
+		
+		require_once DS . 'config' . DS . 'tcppdf_config.php';
+		
+		//var_dump('$pdf');
+		$pdf = new TCPDF ('P', 'mm', 'A4', true, 'UTF-8', false);
+		
+		// set document information
+		$pdf->SetCreator('TCPDF');
+		$pdf->SetAuthor('Florian Rusch');
+		$pdf->SetTitle('Gästebuch System');
+		$pdf->SetSubject('Ein XML-Projekt von Florian Rusch (IT10B)');
+		$pdf->SetKeywords('Gästebuch, System, XML, Florian, Rusch, IT10B');
+
+		// set default header data
+		$pdf->SetHeaderData(null, 0, 'Gästebuch System', 'by Florian Rusch (IT10B)', array(0,0,0), array(0,0,0));
+		$pdf->setFooterData($tc=array(0,0,0), $lc=array(0,0,0));
+
+		// set header and footer fonts
+		$pdf->setHeaderFont(Array('helvetica', '', 10));
+		$pdf->setFooterFont(Array('helvetica', '', 8));
+
+		// set default monospaced font
+		$pdf->SetDefaultMonospacedFont('courier');
+
+		//set margins
+		$pdf->SetMargins(15, 27, 15);
+		$pdf->SetHeaderMargin(10);
+		$pdf->SetFooterMargin(10);
+
+		//set auto page breaks
+		$pdf->SetAutoPageBreak(TRUE, 25);
+
+		//set image scale factor
+		$pdf->setImageScale(1.25);
+
+		//set some language-dependent strings
+		$pdf->setLanguageArray($l);
+
+		// ---------------------------------------------------------
+
+		// set default font subsetting mode
+		$pdf->setFontSubsetting(true);
+
+		// Set font
+		// dejavusans is a UTF-8 Unicode font, if you only need to
+		// print standard ASCII chars, you can use core fonts like
+		// helvetica or times to reduce file size.
+		$pdf->SetFont('dejavusans', '', 14, '', true);
+
+		// Add a page
+		// This method has several options, check the source code documentation for more information.
+		$pdf->AddPage();
+
+		// set text shadow effect
+		//$pdf->setTextShadow(array('enabled'=>true, 'depth_w'=>0.2, 'depth_h'=>0.2, 'color'=>array(196,196,196), 'opacity'=>1, 'blend_mode'=>'Normal'));
+
+		// Set some content to print
+		$html = '<h1>Gästebuch Einträge</h1>';
+		$html .= '<div style="font-size:12px; padding-top: 20px;">';
+			$html .= '<hr />';
+
+			foreach ($entries as $entry) {
+				if ($entry->Status == 1) {
+
+					$html .= '<b>Name:</b> ';
+					if (!empty($entry->Website)) {
+						$html .= '<a href="http://' . $entry->Website . '">' . utf8_encode($entry->Name) . '</a>';
+					} else {
+						$html .= $entry->Name;
+					}
+					$html .= '<br />';
+
+					$html .= '<b>Datum:</b> ' . $entry->Date . '<br />';
+					$html .= '<b>Bewertung:</b> ' . ($entry->Valuation+1) . '<br />';
+
+					$html .= '<b>Beitrag:</b><br />';
+					$html .= utf8_encode($entry->Message);
+					$html .= '<br /><br /><hr />';
+				}
+			}
+		$html .= '</div>';
+		
+		// Print text using writeHTMLCell()
+		$pdf->writeHTMLCell($w=0, $h=0, $x='', $y='', $html, $border=0, $ln=1, $fill=0, $reseth=true, $align='', $autopadding=true);
+
+		// ---------------------------------------------------------
+
+		// Close and output PDF document
+		// This method has several options, check the source code documentation for more information.
+		$pdf->Output('gaestebuch-eintraege.pdf', 'I');
 	}
 }
 
