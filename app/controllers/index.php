@@ -30,11 +30,11 @@ class App_Controllers_Index extends Library_Controller {
 			
 			
 			// Valuation
-			if (empty($formData['valuation'])) {
+			if ($formData['valuation'] >= 0 && $formData['valuation'] <= 3) {
+				$valuation = $formData['valuation'];
+			} else {
 				$error[] = 'valuation';
 				$errorMsg[] = 'Es wurde keine Bewertung abgegeben';
-			} else {
-				$valuation = $formData['valuation'];
 			}
 			
 			
@@ -64,8 +64,9 @@ class App_Controllers_Index extends Library_Controller {
 					'Message' => $message,
 					'Status' => 1
 				);
-				if (parent::loadModel('entries')->saveEntry($para) === true) {
-					$this->view->formMessage['status'] = 'sucess';
+				
+				if (parent::loadModel('entries')->saveEntry($para) == true) {
+					$this->view->formMessage['status'] = 'success';
 					$this->view->formMessage[] = 'Der Gästebuch-Eintrag wurde erfolgreich veröffentlicht.';
 				} else {
 					$this->view->formMessage['status'] = 'error';
@@ -82,9 +83,7 @@ class App_Controllers_Index extends Library_Controller {
 				$this->view->errorFields = $error;
 				$this->view->errorFieldsVal = $formData;
 			}
-			
-			
-			$this->view->renderView('index' . DS . 'index');
+			$this->index();
 		}
 		redirect('/');
 	}
