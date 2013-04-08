@@ -98,55 +98,57 @@
 	<br /><br />
 </div>
 
-<div class="row-fluid">
+
+<?php if (count($this->guestbookEntries) > 0) { ?>
 	<div class="row-fluid">
-		<h2 class="span12 text-center">Einträge</h2>
-	</div>
-	<?php
-		foreach ($this->guestbookEntries as $entry) {
-			if ($entry->Status == 1) {
+		<div class="row-fluid">
+			<h2 class="span12 text-center">Einträge</h2>
+		</div>
+		<?php
+			foreach ($this->guestbookEntries as $entry) {
+				if ($entry->Status == 1) {
 
-				if (!empty($entry->Website)) {
-					$html = '<a href="http://' . $entry->Website . '" title="Zur Website - ' . $entry->Website . '" rel="nofollow" target="_blank">';
-						$html .= $entry->Name;
-					$html .= '</a>';
-				} else {
-					$html = $entry->Name;
+					if (!empty($entry->Website)) {
+						$html = '<a href="http://' . $entry->Website . '" title="Zur Website - ' . $entry->Website . '" rel="nofollow" target="_blank">';
+							$html .= $entry->Name;
+						$html .= '</a>';
+					} else {
+						$html = $entry->Name;
+					}
+		?>
+					<section class="row-fluid">
+						<div class="span8 offset2 well">
+							<div class="row-fluid">
+								<div class="span5"><b><i class="icon-user"></i></b> <?php echo utf8_decode($html) ?></div>
+
+								<div class="span3" style="min-height: 10px !important">
+									<b><i class="icon-calendar"></i></b> <?php echo $entry->Date ?>
+								</div>
+
+								<div class="span4 text-right">
+									<?php for ($i = 0; $i <= $entry->Valuation; $i++) { ?>
+										<i class="icon-star"></i>
+									<?php } ?>
+								</div>
+							</div>
+
+							<div class="row-fluid">
+								<hr />
+							</div>
+
+							<div class="row-fluid">
+								<b>Beitrag:</b><br />
+								<?php echo $entry->Message ?>
+							</div>
+						</div>
+
+					</section>
+		<?php
 				}
-	?>
-				<section class="row-fluid">
-					<div class="span8 offset2 well">
-						<div class="row-fluid">
-							<div class="span5"><b><i class="icon-user"></i></b> <?php echo utf8_encode($html) ?></div>
-							
-							<div class="span3" style="min-height: 10px !important">
-								<b><i class="icon-calendar"></i></b> <?php echo $entry->Date ?>
-							</div>
-							
-							<div class="span4 text-right">
-								<?php for ($i = 0; $i <= $entry->Valuation; $i++) { ?>
-									<i class="icon-star"></i>
-								<?php } ?>
-							</div>
-						</div>
-						
-						<div class="row-fluid">
-							<hr />
-						</div>
-
-						<div class="row-fluid">
-							<b>Beitrag:</b><br />
-							<?php echo utf8_encode($entry->Message) ?>
-						</div>
-					</div>
-					
-				</section>
-	<?php
 			}
-		}
-	?>
-</div>
-
+		?>
+	</div>
+<?php } ?>
 
 
 <script>

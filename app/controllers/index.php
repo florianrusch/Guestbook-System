@@ -50,7 +50,13 @@ class App_Controllers_Index extends Library_Controller {
 			// E-Mail
 			$liame = (!empty($formData['liame'])) ? $formData['liame'] : '';
 			// Website
-			$website = (!empty($formData['website'])) ? $formData['website'] : '';
+			if (!empty($formData['website'])) {
+				$website = $formData['website'];
+				$website = str_replace('https://', '', $website);
+				$website = str_replace('http://', '', $website);
+			} else {
+				$website = '';
+			}
 
 			
 			if (count($error) == 0) {
@@ -84,8 +90,9 @@ class App_Controllers_Index extends Library_Controller {
 				$this->view->errorFieldsVal = $formData;
 			}
 			$this->index();
+		} else {
+			redirect('/');
 		}
-		redirect('/');
 	}
 }
 
