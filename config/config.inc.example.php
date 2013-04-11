@@ -1,10 +1,9 @@
 <?php
 
 /*
- * Entwickler-Modus
+ * Error-Reporting
  */
-define ('DEV', true);
-
+error_reporting(E_ALL ^ E_NOTICE);
 
 
 /*
