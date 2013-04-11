@@ -3,8 +3,8 @@
 define('DS', '/');
 define('ROOT', dirname(__FILE__) . DS);
 
-$utilsPath = ROOT . 'etc' . DS . 'utils.php';
 $configPath = ROOT . 'config' . DS . 'config.inc.php';
+$utilsPath = ROOT . 'etc' . DS . 'utils.php';
 
 if (is_readable($configPath)) {
 	require_once $configPath;
