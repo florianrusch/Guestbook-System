@@ -138,7 +138,7 @@
 
 							<div class="row-fluid">
 								<b>Beitrag:</b><br />
-								<?php echo $entry->Message ?>
+								<?php echo nl2br(htmlentities(utf8_decode($entry->Message))) ?>
 							</div>
 						</div>
 

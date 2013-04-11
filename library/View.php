@@ -34,8 +34,6 @@ class Library_View {
 			foreach ($paths as $key => $value) {
 				if (file_exists($value)) {
 					require_once $value;
-				} else {
-					$this->debugMessages[] = 'ERROR: Das ' . $key . '-Template ist nicht vorhanden. (Path = ' . $value . ')';
 				}
 			}
 		} else {
@@ -57,7 +55,6 @@ class Library_View {
 		if (file_exists(ROOT . $path)) {
 			return '<script src="' . $path . '"></script>';
 		} else {
-			$this->debugMessage[] = 'ERROR: Datei konnte nicht geladen werden. (Path = ' . $path . ')';
 			return '';
 		}
 	}
@@ -77,7 +74,6 @@ class Library_View {
 		if (file_exists(ROOT . $path)) {
 			return '<link type="text/css" rel="Stylesheet" media="' . $media . '" href="' . $path . '" />';
 		} else {
-			$this->debugMessage[] = 'ERROR: Datei konnte nicht geladen werden. (Path = ' . $path . ')';
 			return '';
 		}
 	}
@@ -96,7 +92,6 @@ class Library_View {
 			$this->header = $path;
 			return true;
 		} else {
-			$this->debugMessage[] = 'ERROR: Datei konnte nicht geladen werden. (Path = ' . $path . ')';
 			return false;
 		}
 	}
@@ -115,19 +110,17 @@ class Library_View {
 			$this->footer = $path;
 			return true;
 		} else {
-			$this->debugMessage[] = 'ERROR: Datei konnte nicht geladen werden. (Path = ' . $path . ')';
 			return false;
 		}
 	}
 	
 	
-	public function getDebugLog() {
-		$return = '<div id="debugLog">';
-		foreach ($this->debugMessages as $mes) {
-			$return .= '>> ' . $mes . '<br />';
+	
+	public function isActiveSite($path) {
+		if(strpos($_SERVER['REDIRECT_URL'], $path) !== false) {
+			return true;
 		}
-		$return .= '</div>';
-		return $return;
+		return false;
 	}
 }
 

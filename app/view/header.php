@@ -34,28 +34,28 @@
 					<nav class="navbar">
 						<div class="navbar-inner text-center">
 							<ul class="nav">
-								<li class="active">
-									<a href="/" title="Gästebuch Einträge">
+								<li<?php if($this->isActiveSite('/index')) { echo ' class="active"'; } ?>>
+									<a href="/index" title="Gästebuch Einträge">
 										Web-Ansicht
 									</a>
 								</li>
-								<li>
+								<li<?php if($this->isActiveSite('/export/xml/')) { echo ' class="active"'; } ?>>
 									<a href="/export/xml/" title="Gästebuch Einträge - XML Export">
 										XML-Export
 									</a>
 								</li>
-								<li>
+								<li<?php if($this->isActiveSite('/export/pdf/')) { echo ' class="active"'; } ?>>
 									<a href="/export/pdf/" title="Gästebuch Einträge - PDF Export"  target="_blank">
 										PDF-Export
 									</a>
 								</li>
-								<li class="dropdown">
+								<li class="dropdown<?php if($this->isActiveSite('/export/img')) { echo ' active'; } ?>">
 									<a class="dropdown-toggle" href="/export/img/" title="Gästebuch - Statistik  - JPG Export" data-toggle="dropdown" target="_blank">
 										JPG-Export<b class="caret"></b>
 									</a>
 									<ul class="dropdown-menu">
 										<?php foreach($this->subMenuImgYears as $y) { ?>
-											<li>
+											<li<?php if($this->isActiveSite('/export/img/' . $y->Date)) { echo ' class="active"'; } ?>>
 												<a href="/export/img/<?php echo $y->Date ?>" title="Gästebuch Einträge - Statistik - Jahr <?php echo $y->Date ?>" target="_blank">
 													<?php echo $y->Date ?>
 												</a>

@@ -10,13 +10,17 @@ function __autoload($str) {
 	$str = str_replace('_', '/', $str);
 	
 	if (count($arrayStr) >= 2) {
-		if ($arrayStr[0] == 'TCPDF') {
+		if ($arrayStr[0] == 'TCPDF' && is_readable('library/extern/' . strtolower($str) . '.php')) {
 			require_once 'library/extern/' . strtolower($str) . '.php';
-		} else {
+		} else if(is_readable(strtolower($str) . '.php')) {
 			require_once strtolower($str) . '.php';
+		} else {
+			redirect('/index');
 		}
-	} else {
+	} else if(is_readable('library/extern/' . $str . '.php')) {
 		require_once 'library/extern/' . $str . '.php';
+	} else {
+		redirect('/index');
 	}
 }
 
@@ -26,7 +30,7 @@ function __autoload($str) {
 /**
  * Liefert das aktuell verwendetet Protkoll zurück.
  * 
- * @return string Protokoll in Kleinbuchstaben
+ * @return string http, https
  */
 function getProtocol() {
 	$protocol = 'http';
