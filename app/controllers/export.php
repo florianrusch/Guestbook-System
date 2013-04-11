@@ -23,7 +23,7 @@ class App_Controllers_Export extends Library_Controller {
 			$txml->addChild('email', $entry->EMail);
 			$txml->addChild('url', $entry->Website);
 			$txml->addChild('valudation', $entry->Valuation);
-			$txml->addChild('comment', $entry->Message);
+			$txml->addChild('comment', htmlentities($entry->Message));
 		}
 		$this->view->xml = $xml->asXML();
 		
@@ -94,7 +94,7 @@ class App_Controllers_Export extends Library_Controller {
 	public function pdf() {
 		$entries = parent::loadModel('Entries')->getAllEntries();
 		
-		require_once DS . 'config' . DS . 'tcppdf_config.php';
+		require_once ROOT . DS . 'config' . DS . 'tcppdf_config.php';
 		
 		//var_dump('$pdf');
 		$pdf = new TCPDF ('P', 'mm', 'A4', true, 'UTF-8', false);
@@ -159,7 +159,7 @@ class App_Controllers_Export extends Library_Controller {
 
 					$html .= '<b>Name:</b> ';
 					if (!empty($entry->Website)) {
-						$html .= '<a href="http://' . $entry->Website . '">' . utf8_encode($entry->Name) . '</a>';
+						$html .= '<a href="http://' . $entry->Website . '">' . $entry->Name . '</a>';
 					} else {
 						$html .= $entry->Name;
 					}
@@ -169,7 +169,7 @@ class App_Controllers_Export extends Library_Controller {
 					$html .= '<b>Bewertung:</b> ' . ($entry->Valuation+1) . '<br />';
 
 					$html .= '<b>Beitrag:</b><br />';
-					$html .= utf8_encode($entry->Message);
+					$html .= $entry->Message;
 					$html .= '<br /><br /><hr />';
 				}
 			}
